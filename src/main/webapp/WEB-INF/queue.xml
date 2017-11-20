@@ -1,0 +1,8 @@
+<queue-entries>
+  <queue>
+    <name>products-queue</name>
+    <rate>100/s</rate>
+    <bucket-size>20</bucket-size>
+    <mode>push</mode>
+  </queue>
+</queue-entries>
