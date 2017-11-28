@@ -8,6 +8,27 @@ $(document).ready(function() {
 		no_data_text: ""
 	});
 	
+	$('#contentArea').on('click', 'li', function() {
+		var _term = decodeURI(this.innerHTML);
+		$("#autocomplete").val(_term);
+		$.ajax({
+			url: url,
+			dataType: "json",
+			data: {
+				term: _term.toLowerCase()
+			},
+			success: function (data) {
+				var results = [];
+				clusterize.update(results);
+				$("#autocomplete").focus();
+			},
+			error: function (xhr, textStatus, errorThrown) {
+				console.log(xhr.status);
+				console.log(errorThrown);
+			}
+		});
+	});
+	
 	$("#autocomplete").keyup(function(event) {
 		
 		if (this.value.length === 0) {
