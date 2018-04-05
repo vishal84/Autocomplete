@@ -1,3 +1,4 @@
+/* Author: Vishal Patel */
 #autocomplete {
   width: 559px;
   height: 34px;
@@ -39,7 +40,7 @@ div#fkbx input#autocomplete {
 }
 
 #lga h2 { 
-	font-family: arial;
+	font-family: arial, serif;
 	color: #aaa;
 }
 

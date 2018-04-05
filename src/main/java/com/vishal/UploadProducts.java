@@ -26,7 +26,7 @@ public class UploadProducts extends HttpServlet {
 		String i = request.getParameter("i");
 
 		Queue queue = QueueFactory.getQueue("products-queue");
-		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(new File(getClass().getClassLoader().getResource("products" + i + ".json").getFile())), "UTF-8"));
+		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(new File(getClass().getClassLoader().getResource("test.json").getFile())), "UTF-8"));
 		Gson gson = new GsonBuilder().create();
 
 		// Read file in stream mode
@@ -46,9 +46,9 @@ public class UploadProducts extends HttpServlet {
 	
 	public static class DeferedProductAdd implements DeferredTask {
 
-		public Product product;
+		private Product product;
 		
-		public DeferedProductAdd(Product product) {
+		private DeferedProductAdd(Product product) {
 			this.product = product;
 		}
 
