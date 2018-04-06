@@ -26,7 +26,7 @@ public class UploadProducts extends HttpServlet {
 		String i = request.getParameter("i");
 
 		Queue queue = QueueFactory.getQueue("products-queue");
-		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(new File(getClass().getClassLoader().getResource("test.json").getFile())), "UTF-8"));
+		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(new File(getClass().getClassLoader().getResource("prod" + i + ".json").getFile())), "UTF-8"));
 		Gson gson = new GsonBuilder().create();
 
 		// Read file in stream mode

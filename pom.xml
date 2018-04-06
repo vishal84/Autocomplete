@@ -11,11 +11,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <archiveClasses>true</archiveClasses>
-	<appengine-maven.version>1.9.58</appengine-maven.version>
+	<appengine-maven.version>1.9.63</appengine-maven.version>
   </properties>
 
   <dependencies>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.google.appengine</groupId>
       <artifactId>appengine-api-1.0-sdk</artifactId>
-      <version>1.9.58</version>
+      <version>1.9.63</version>
     </dependency>
     
     <dependency>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.google.appengine</groupId>
       <artifactId>appengine-tools-sdk</artifactId>
-      <version>1.9.58</version>
+      <version>1.9.63</version>
       <scope>test</scope>
     </dependency>
 
