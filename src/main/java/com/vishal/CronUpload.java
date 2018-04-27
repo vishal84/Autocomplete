@@ -30,15 +30,12 @@ public class CronUpload extends HttpServlet {
         // Load file from existing Cloud Storage bucket
         // Testing this does not work locally...
         Storage storage = StorageOptions.getDefaultInstance().getService();
-        BlobId blobId = BlobId.of("vish-cloud-dev.appspot.com", "test.json");
+        BlobId blobId = BlobId.of("vish-cloud-dev.appspot.com", "products.json");
 
         // Read contents of Blob to a byte array
-        // Create a String object from the byte array
-        // Stream read the contents of the String using JsonReader
-        // This avoids hitting memory peak trying to serialize the whole object at once
+        // Add b
         byte[] content = storage.readAllBytes(blobId);
-        String contentString = new String(content, UTF_8);
-        JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(contentString)));
+        JsonReader reader = new JsonReader(new InputStreamReader(new ByteArrayInputStream(content)));
 
         // Create a Queue to place all the uploaded products on 1x1
         // Use Gson to read JSON objects
