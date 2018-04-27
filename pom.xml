@@ -33,7 +33,13 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Test Dependencies -->
+    <!-- Google Cloud Client Library for Java -->
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-storage</artifactId>
+      <version>1.27.0</version>
+    </dependency>
+
     <dependency>
       <groupId>com.google.appengine</groupId>
       <artifactId>appengine-tools-sdk</artifactId>

@@ -4,7 +4,11 @@ import com.google.appengine.api.taskqueue.DeferredTask;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
-import com.google.appengine.tools.cloudstorage.*;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -14,39 +18,31 @@ import com.vishal.model.Product;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.channels.Channels;
 
 
 public class CronUpload extends HttpServlet {
 
-    /**
-     * This is where backoff parameters are configured. Here it is aggressively retrying with
-     * backoff, up to 10 times but taking no more that 15 seconds total to do so.
-     */
-    private final GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
-            .initialRetryDelayMillis(10)
-            .retryMaxAttempts(10)
-            .totalRetryPeriodMillis(15000)
-            .build());
-
-    /**Used below to determine the size of chucks to read in. Should be > 1kb and < 10MB */
-    private static final int BUFFER_SIZE = 2 * 1024 * 1024;
-    // final String bucket = "vishalapatel-sandbox.appspot.com";
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        //GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
-        //copy(Channels.newInputStream(readChannel), response.getOutputStream());
-        //gcsService.openPrefetchingReadChannel();
-        /* Figure out how to read from a GCS Bucket then stream into TaskQueues.... */
+        // Load file from existing Cloud Storage bucket
+        // Testing this does not work locally...
+        Storage storage = StorageOptions.getDefaultInstance().getService();
+        BlobId blobId = BlobId.of("vish-cloud-dev.appspot.com", "products.json");
 
+        // Read contents of Blob to a byte array
+        // Create a String object from the byte array
+        // Stream read the contents of the String using JsonReader
+        // This avoids hitting memory peak trying to serialize the whole object at once
+        byte[] content = storage.readAllBytes(blobId);
+        String contentString = new String(content, UTF_8);
+        JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(contentString)));
+
+        // Create a Queue to place all the uploaded products on 1x1
+        // Use Gson to read JSON objects
         Queue queue = QueueFactory.getQueue("products-queue");
-        JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(new File(getClass().getClassLoader().getResource("products.json").getFile())), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
         // Read file in stream mode
