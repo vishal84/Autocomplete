@@ -20,6 +20,14 @@
     <servlet-name>GetProducts</servlet-name>
     <url-pattern>/get</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CronUpload</servlet-name>
+    <servlet-class>com.vishal.CronUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CronUpload</servlet-name>
+    <url-pattern>/cronupload</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
