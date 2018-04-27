@@ -30,7 +30,7 @@ public class CronUpload extends HttpServlet {
         // Load file from existing Cloud Storage bucket
         // Testing this does not work locally...
         Storage storage = StorageOptions.getDefaultInstance().getService();
-        BlobId blobId = BlobId.of("vish-cloud-dev.appspot.com", "products.json");
+        BlobId blobId = BlobId.of("vish-cloud-dev.appspot.com", "test.json");
 
         // Read contents of Blob to a byte array
         // Create a String object from the byte array
