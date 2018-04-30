@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+    <cron>
+        <url>/cronupload</url>
+        <description>monthly upload of products</description>
+        <schedule>third wednesday of month 09:00</schedule>
+    </cron>
+</cronentries>
